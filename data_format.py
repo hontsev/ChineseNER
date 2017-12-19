@@ -52,7 +52,7 @@ def get_type_encode(text):
         return 'unknown'
 
 # 将boson数据格式归一化为系统内部的格式
-def format_boson_data(file_name='BosonNLP_NER_6C.txt'):
+def format_boson_data(file_name='corpus/BosonNLP_NER_6C.txt'):
     res=list()
     tmp = load_data(file_name)
     for line in tmp:
@@ -85,7 +85,7 @@ def format_boson_data(file_name='BosonNLP_NER_6C.txt'):
         res.append("")
     print(res)
     # save
-    file=open("boson_ner_format.txt",'w',encoding='utf-8')
+    file=open("corpus/boson_ner_format.txt",'w',encoding='utf-8')
     try:
         # file.writelines(res)
         for item in res:
@@ -162,7 +162,7 @@ def load_data(path):
             if item.split(' ').__len__()>=2:
                 word=item.split(' ')[0]
                 type=item.split(' ')[1].replace('\n','').replace('\r','')
-                res_line.append((word,'','',type))
+                res_line.append([word,'','',type])
             else:
                 get_cut_and_seg(res_line)
                 res.append(res_line)

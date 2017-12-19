@@ -1,24 +1,4 @@
 # -*- coding: utf-8 -*-
-#  import numpy as np
-#
-# a = np.array([1.1,2.2,"4"])
-# b = np.array([5,6,7,8])
-# c = np.array([[1,2,3,4],[4,5,6,7],[7,8,9,10]])
-#
-# c.shape=4,3
-#
-# a=np.arange(0,1,0.1)
-# a=np.logspace(0,2,20)
-#
-#
-# import nltk
-# # nltk.download()
-# tokens=nltk.word_tokenize('hello,how are you today? Fine, Thanks!')
-# tokens=nltk.pos_tag(tokens)
-# # print(tokens)
-
-
-
 
 import data_format as format
 from itertools import chain
@@ -29,12 +9,7 @@ import sklearn
 import pycrfsuite
 import re
 
-# print(sklearn.__version__)
-
-# print(nltk.corpus.conll2002.fileids())
-# ['esp.testa', 'esp.testb', 'esp.train', 'ned.testa', 'ned.testb', 'ned.train']
-
-modelname='modeloutput'
+modelname='model/ner.model'
 # train_file='example.train'
 # test_file='example.test'
 
@@ -128,7 +103,7 @@ def sent2tokens(sent):
 
 
 # 加载数据
-def load(train_file='example.train',test_file='example.test'):
+def load(train_file='corpus/example.train',test_file='corpus/example.test'):
     global train_sents, test_sents,X_train,y_train,X_test,y_test
 
     train_sents=format.load_data(train_file)
@@ -168,10 +143,9 @@ def tagger():
     tagger.open(modelname)
     example_sent = test_sents[0]
 
-    print(' '.join(sent2tokens(example_sent)), end='\n\n')
-    print("Predicted:", ' '.join(tagger.tag(sent2features(example_sent))))
-    print("Correct:  ", ' '.join(sent2labels(example_sent)))
-
+    # print(' '.join(sent2tokens(example_sent)), end='\n\n')
+    # print("Predicted:", ' '.join(tagger.tag(sent2features(example_sent))))
+    # print("Correct:  ", ' '.join(sent2labels(example_sent)))
 
     y_pred = [tagger.tag(xseq) for xseq in X_test]
 
