@@ -180,6 +180,11 @@ def split_by_words(sentence):
     get_cut_and_seg(res)
     return res
 
+def merge_data():
+    f1=open('corpus/example.train','r',encoding='utf-8')
+    f2=open('corpus/bosen_ner_format.txt','r',encoding='utf-8')
+    output=open('corpus/merge.train','w',encoding='utf-8')
+
 
 if __name__ == '__main__':
     # load()

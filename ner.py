@@ -2,12 +2,11 @@
 
 import data_format as format
 from itertools import chain
-import nltk
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.preprocessing import LabelBinarizer
 import sklearn
 import pycrfsuite
-import re
+# import re
 
 modelname='model/ner.model'
 # train_file='example.train'
@@ -60,9 +59,6 @@ def word2features(sent, i):
         cuttag1 = sent[i - 1][1]
         features.extend([
             '-1:word='+word1,
-           # '-1:word.lower=' + word1.lower(),
-          #  '-1:word.istitle=%s' % word1.istitle(),
-           # '-1:word.isupper=%s' % word1.isupper(),
             '-1:postag=' + postag1,
             '-1:cuttag=' + cuttag1,
            # '-1:postag[:2]=' + postag1[:2],
@@ -76,9 +72,6 @@ def word2features(sent, i):
         cuttag1 = sent[i + 1][1]
         features.extend([
             '+1:word=' + word1,
-            #'+1:word.lower=' + word1.lower(),
-            #'+1:word.istitle=%s' % word1.istitle(),
-            #'+1:word.isupper=%s' % word1.isupper(),
             '+1:postag=' + postag1,
             '+1:cuttag=' + cuttag1,
             #'+1:postag[:2]=' + postag1[:2],
@@ -113,6 +106,7 @@ def load(train_file='corpus/example.train',test_file='corpus/example.test'):
 
     X_train = [sent2features(s) for s in train_sents]
     y_train = [sent2labels(s) for s in train_sents]
+    # print(y_train)
     X_test = [sent2features(s) for s in test_sents]
     y_test = [sent2labels(s) for s in test_sents]
 
